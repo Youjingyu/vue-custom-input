@@ -9,7 +9,7 @@
   "dependencies": {
     "vue": "^2.4.4"
   },
-  "description": "Vue component for smooth scrolling, pull to refresh & infinite loading.",
+  "description": "Vue component for custom input, mobile web input, simulating native app input.",
   "devDependencies": {
     "babel-core": "^6.26.0",
     "babel-loader": "^6.4.1",
