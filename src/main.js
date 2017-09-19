@@ -1,11 +1,11 @@
-import CustomInput from './components/Input.vue'
+import App from './App.vue'
 import Vue from 'vue'
 
 new Vue({
     el: '#app',
-    template: '<CustomInput />',
+    template: '<App />',
     components: {
-        CustomInput
+        App
     }
     // render: h => h(CustomInput)
 })
