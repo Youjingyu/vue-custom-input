@@ -1,22 +1,17 @@
 <template>
     <div class="custom-input-test">
-        <CustomInput :container-style="width"/>
+        <CustomInput />
     </div>
 </template>
 <script>
     import CustomInput from './components/Input.vue'
     export default {
-//        name: 'CustomInput',
-        components: { CustomInput },
-        data() {
-            return {
-                width: {width: '300px'}
-            }
-        }
+        components: { CustomInput }
     }
 </script>
 <style lang="css" scoped>
     .custom-input-test{
         height: 50px;
+        width: 300px;
     }
 </style>

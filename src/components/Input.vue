@@ -1,23 +1,75 @@
 <template>
-    <div class="custom-input" :style="containerStyle">
-        <span class="custom-input-span" :style="inputStyle"></span>
+    <div class="custom-input">
+        <span v-for="(input, index) in inputs" @click="inputClick(index)" :style="[inputStyle, input.active ? inputActiveStyle : '']" class="custom-input-span"></span>
     </div>
 </template>
 <script>
     export default {
         name: 'CustomInput',
         props: {
-            'containerStyle': {
-                type: Object,
-                default: {}
+            'inputNumber': {
+                type: Number,
+                default: 4,
+                required: false
             },
-            'inputStyle': {
-                type: Object,
-                default: {}
+            'inputWidth': {
+                type: String,
+                default: '',
+                required: false
+            },
+            'inputBorderWidth': {
+                type: String,
+                default: '1px',
+                required: false
+            },
+            'inputBorderColor': {
+                type: String,
+                default: '#20A0FF',
+                required: false
+            },
+            'inputActiveOutline': {
+                type: String,
+                default: '#58B7FF',
+                required: false
             }
         },
         data() {
-            return {}
+            return {
+                inputs: new Array(this.inputNumber).fill({active: false})
+            }
+        },
+        computed: {
+            inputStyle() {
+                let width = this.inputWidth;
+                if(width === ''){
+                    width = 100 / this.inputNumber - 5 + '%'
+                }
+                return {
+                    width: width,
+                    borderWidth: this.inputBorderWidth,
+                    borderColor: this.inputBorderColor
+                }
+            },
+            inputActiveStyle() {
+                return {
+                    outline: this.inputActiveOutline + ' auto 5px'
+                }
+            }
+        },
+        methods: {
+            setInputAcitve(index) {
+                const inputs = this.inputs;
+                for(let i = 0; i < inputs.length; i++){
+                    if(inputs[i].active === true){
+                        this.$set(inputs, i, {active: false});
+                        break;
+                    }
+                }
+                this.$set(inputs, index, {active: true});
+            },
+            inputClick: function(index) {
+                this.setInputAcitve(index);
+            }
         }
     }
 </script>
@@ -25,14 +77,12 @@
     .custom-input{
         display: flex;
         align-items: center;
-        justify-content: center;
-        width: 100%;
+        justify-content: space-between;
         height: 100%;
     }
     .custom-input-span {
-        flex: 1;
         height: 100%;
-        border: 1px solid;
         box-sizing: border-box;
+        border-style: solid;
     }
 </style>
