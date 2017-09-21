@@ -1,9 +1,9 @@
 <template>
     <div class="custom-input">
-        <span v-for="(input, index) in inputs" :key="index" @click="inputClick(index)"
-              :style="[inputStyle, input.active ? inputActiveStyle : '']"
-              class="custom-input-span" :class="inputTypeStyle"></span>
-        <input type="text" class="cutom-input-hide">
+        <span v-for="(input, index) in spanStatus" :key="index" @click="spanClick(index)"
+              :style="[spanStyle, input.active ? spanActiveStyle : '']"
+              class="custom-input-span" :class="spanTypeStyle"></span>
+        <input ref="hideInput" @keydown="inputKeydown" type="text" class="cutom-input-hide" onpaste="return false;">
     </div>
 </template>
 <script>
@@ -43,11 +43,11 @@
         },
         data() {
             return {
-                inputs: new Array(this.inputNumber).fill({active: false})
+                spanStatus: new Array(this.inputNumber).fill({active: false})
             }
         },
         computed: {
-            inputStyle() {
+            spanStyle() {
                 let width = this.inputWidth;
                 if(width === ''){
                     width = 100 / this.inputNumber - 5 + '%'
@@ -58,14 +58,14 @@
                     borderColor: this.inputBorderColor
                 }
             },
-            inputTypeStyle() {
+            spanTypeStyle() {
                 const styleConfig = {
                     allBorder: '',
                     oneBorder: ['custom-input-no-border']
                 }
                 return styleConfig[this.inputType];
             },
-            inputActiveStyle() {
+            spanActiveStyle() {
                 const styleConfig = {
                     allBorder: {outline: this.inputActiveOutline + ' auto 5px'},
                     oneBorder: {'box-shadow': '0 1px 0 ' + this.inputActiveOutline}
@@ -74,19 +74,28 @@
             }
         },
         methods: {
-            setInputAcitve(index) {
-                const inputs = this.inputs;
+            setSpanAcitve(index) {
+                const inputs = this.spanStatus;
                 for(let i = 0; i < inputs.length; i++){
                     if(inputs[i].active === true){
                         this.$set(inputs, i, {active: false});
-                        if(i === index){ return }
+                        if(i === index){ return 'cancelActive'}
                         break;
                     }
                 }
                 this.$set(inputs, index, {active: true});
             },
-            inputClick: function(index) {
-                this.setInputAcitve(index);
+            spanClick(index) {
+                const activeResult = this.setSpanAcitve(index);
+                const hideInput = this.$refs.hideInput;
+                activeResult === 'cancelActive' ? hideInput.blur() : hideInput.focus();
+            },
+            inputKeydown($event) {
+                const value = $event.target.value;
+                const keycode = $event.keyCode || $event.which;
+                if(keycode !== 8 && value.length >= this.inputNumber){
+                    $event.preventDefault();
+                }
             }
         }
     }
