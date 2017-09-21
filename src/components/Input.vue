@@ -1,7 +1,7 @@
 <template>
     <div class="custom-input">
-        <span v-for="(input, index) in spanStatus" :key="index" @click="spanClick(index)"
-              :style="[spanStyle, input.active ? spanActiveStyle : '']"
+        <span v-for="(input, index) in spanValue" :key="index" @click="spanClick(index)"
+              :style="[spanStyle, activeIndex === index ? spanActiveStyle : '']"
               class="custom-input-span" :class="spanTypeStyle"></span>
         <input ref="hideInput" @keydown="inputKeydown" @input="inputEvent" @blur="inputBlur" type="text" class="cutom-input-hide" onpaste="return false;">
     </div>
@@ -44,7 +44,8 @@
         },
         data() {
             return {
-                spanStatus: new Array(this.inputNumber).fill({active: false, value: ''}),
+                spanValue: new Array(this.inputNumber).fill(''),
+                activeIndex: undefined,
                 blurTimer: null
             }
         },
@@ -77,43 +78,22 @@
         },
         methods: {
             setSpanAcitve(index) {
-                const spans = this.spanStatus;
-                let obj;
-                for(let i = 0; i < spans.length; i++){
-                    if(spans[i].active === true){
-                        obj = assignObj(spans[i]);
-                        obj.active = false;
-                        this.$set(spans, i, obj);
-                        if(i === index){ return 'cancelActive'}
-                        break;
-                    }
-                }
-                obj = assignObj(spans[index]);
-                obj.active = true;
-                this.$set(spans, index, obj);
-            },
-            removeSpanActive() {
-                const spans = this.spanStatus;
-                let obj;
-                for(let i = 0; i < spans.length; i++){
-                    if(spans[i].active === true){
-                        obj = assignObj(spans[i]);
-                        obj.active = false;
-                        this.$set(spans, i, obj);
-                        break;
-                    }
+                if(this.activeIndex === index){
+                    this.activeIndex = undefined;
+                } else {
+                    this.activeIndex = index;
                 }
             },
             spanClick(index) {
                 clearTimeout(this.blurTimer);
-                const activeResult = this.setSpanAcitve(index);
+                this.setSpanAcitve(index);
                 const hideInput = this.$refs.hideInput;
-                activeResult === 'cancelActive' ? hideInput.blur() : hideInput.focus();
+                hideInput.focus();
             },
             inputBlur(){
                 this.blurTimer = setTimeout(() => {
-                    this.removeSpanActive();
-                }, 0);
+                    this.setSpanAcitve(this.activeIndex);
+                }, 100);
             },
             inputKeydown($event) {
                 const keycode = $event.keyCode || $event.which;
