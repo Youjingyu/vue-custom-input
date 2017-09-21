@@ -77,23 +77,15 @@
             }
         },
         methods: {
-            setSpanAcitve(index) {
-                if(this.activeIndex === index){
-                    this.activeIndex = undefined;
-                } else {
-                    this.activeIndex = index;
-                }
-            },
             spanClick(index) {
                 clearTimeout(this.blurTimer);
-                this.setSpanAcitve(index);
-                const hideInput = this.$refs.hideInput;
-                hideInput.focus();
+                this.activeIndex = index;
+                this.$refs.hideInput.focus();
             },
             inputBlur(){
                 this.blurTimer = setTimeout(() => {
-                    this.setSpanAcitve(this.activeIndex);
-                }, 100);
+                    this.activeIndex = undefined;
+                }, 0);
             },
             inputKeydown($event) {
                 const keycode = $event.keyCode || $event.which;
