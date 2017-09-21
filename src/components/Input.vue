@@ -45,8 +45,7 @@
         data() {
             return {
                 spanValue: new Array(this.inputNumber).fill(''),
-                activeIndex: undefined,
-                blurTimer: null
+                activeIndex: undefined
             }
         },
         computed: {
@@ -78,14 +77,11 @@
         },
         methods: {
             spanClick(index) {
-                clearTimeout(this.blurTimer);
                 this.activeIndex = index;
                 this.$refs.hideInput.focus();
             },
             inputBlur(){
-                this.blurTimer = setTimeout(() => {
-                    this.activeIndex = undefined;
-                }, 0);
+                this.activeIndex = undefined;
             },
             inputKeydown($event) {
                 const keycode = $event.keyCode || $event.which;
