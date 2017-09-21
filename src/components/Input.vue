@@ -3,6 +3,7 @@
         <span v-for="(input, index) in inputs" :key="index" @click="inputClick(index)"
               :style="[inputStyle, input.active ? inputActiveStyle : '']"
               class="custom-input-span" :class="inputTypeStyle"></span>
+        <input type="text" class="cutom-input-hide">
     </div>
 </template>
 <script>
@@ -93,6 +94,7 @@
 <style lang="css" scoped>
     .custom-input{
         display: flex;
+        position: relative;
         align-items: center;
         justify-content: space-between;
         height: 100%;
@@ -108,5 +110,14 @@
         border-right: none;
         border-left: none;
     }
+    .cutom-input-hide{
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+        box-sizing: border-box;
+        opacity: 0;
+    }
+    .cutom-input-hide:focus{}
 
 </style>
