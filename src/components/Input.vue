@@ -78,6 +78,7 @@
                 for(let i = 0; i < inputs.length; i++){
                     if(inputs[i].active === true){
                         this.$set(inputs, i, {active: false});
+                        if(i === index){ return }
                         break;
                     }
                 }
