@@ -1,6 +1,6 @@
 <template>
     <div class="custom-input-test">
-        <CustomInput />
+        <CustomInput inputType="oneBorder"/>
     </div>
 </template>
 <script>

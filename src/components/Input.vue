@@ -1,6 +1,8 @@
 <template>
     <div class="custom-input">
-        <span v-for="(input, index) in inputs" @click="inputClick(index)" :style="[inputStyle, input.active ? inputActiveStyle : '']" class="custom-input-span"></span>
+        <span v-for="(input, index) in inputs" :key="index" @click="inputClick(index)"
+              :style="[inputStyle, input.active ? inputActiveStyle : '']"
+              class="custom-input-span" :class="inputTypeStyle"></span>
     </div>
 </template>
 <script>
@@ -10,6 +12,11 @@
             'inputNumber': {
                 type: Number,
                 default: 4,
+                required: false
+            },
+            'inputType': {
+                type: String,
+                default: 'allBorder',
                 required: false
             },
             'inputWidth': {
@@ -50,10 +57,19 @@
                     borderColor: this.inputBorderColor
                 }
             },
-            inputActiveStyle() {
-                return {
-                    outline: this.inputActiveOutline + ' auto 5px'
+            inputTypeStyle() {
+                const styleConfig = {
+                    allBorder: '',
+                    oneBorder: ['custom-input-no-border']
                 }
+                return styleConfig[this.inputType];
+            },
+            inputActiveStyle() {
+                const styleConfig = {
+                    allBorder: {outline: this.inputActiveOutline + ' auto 5px'},
+                    oneBorder: {outline: this.inputActiveOutline + ' auto 5px'}
+                }
+                return styleConfig[this.inputType];
             }
         },
         methods: {
@@ -81,8 +97,15 @@
         height: 100%;
     }
     .custom-input-span {
+        position: relative;
         height: 100%;
         box-sizing: border-box;
         border-style: solid;
     }
+    .custom-input-no-border {
+        border-top: none;
+        border-right: none;
+        border-left: none;
+    }
+
 </style>
