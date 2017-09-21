@@ -67,7 +67,7 @@
             inputActiveStyle() {
                 const styleConfig = {
                     allBorder: {outline: this.inputActiveOutline + ' auto 5px'},
-                    oneBorder: {outline: this.inputActiveOutline + ' auto 5px'}
+                    oneBorder: {'box-shadow': '0 1px 0 ' + this.inputActiveOutline}
                 }
                 return styleConfig[this.inputType];
             }
