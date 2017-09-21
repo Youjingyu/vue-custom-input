@@ -28,3 +28,11 @@ export const fadeColor = (color, percent) => {
 
     return gradientColors(color, percent);
 };
+
+export const assignObj = (obj) => {
+    const result = {};
+    for(let i in obj){
+        result[i] = obj[i]
+    }
+    return result;
+}
