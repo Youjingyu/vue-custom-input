@@ -95,11 +95,13 @@
             },
             inputKeydown($event) {
                 const keycode = $event.keyCode || $event.which;
-                if(keycode === 8){
+                if(keycode === 8) {
+                    let backFlag = this.spanValue[this.activeIndex] === '' ? true : false;
                     this.$set(this.spanValue, this.activeIndex, '');
                     this.$emit('custom-input-change', this.getCustomInputVal());
-                    if(this.activeIndex > 0 && this.spanValue[this.activeIndex -1] === ''){
-                        this.activeIndex --;
+                    if (this.activeIndex > 0 && backFlag) {
+                        this.activeIndex--;
+                        this.$set(this.spanValue, this.activeIndex, '');
                     }
                 }
             },
@@ -109,7 +111,7 @@
                     this.$set(this.spanValue, this.activeIndex, hideInput.value);
                     $event.target.value = '';
                     this.$emit('custom-input-change', this.getCustomInputVal());
-                    if(this.activeIndex < this.inputNumber - 1 && this.spanValue[this.activeIndex + 1] === ''){
+                    if(this.activeIndex < this.inputNumber - 1){
                         this.activeIndex ++;
                     }
                     const val = this.getCustomInputCompleteVal();
