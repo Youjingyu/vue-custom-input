@@ -122,6 +122,7 @@
         box-sizing: border-box;
         opacity: 0;
     }
-    .cutom-input-hide:focus{}
-
+    .cutom-input-hide:focus{
+        outline: none;
+    }
 </style>
