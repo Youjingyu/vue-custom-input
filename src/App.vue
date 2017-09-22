@@ -1,6 +1,6 @@
 <template>
     <div class="custom-input-test">
-        <CustomInput inputType="oneBorder" @custom-input-change="complete"/>
+        <CustomInput inputType="password" @custom-input-change="complete"/>
     </div>
 </template>
 <script>

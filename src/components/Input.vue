@@ -2,7 +2,7 @@
     <div class="custom-input">
         <span v-for="(text, index) in spanValue" :key="index" @click="spanClick(index)"
               :style="[spanStyle, activeIndex === index ? spanActiveStyle : '']"
-              class="custom-input-span" :class="spanTypeStyle">{{text}}</span>
+              class="custom-input-span" :class="spanTypeStyle">{{inputType === 'text' ? text : (text === '' ? '' : passwordChar)}}</span>
         <input ref="hideInput" @keydown="inputKeydown" @input="inputEvent" @blur="inputBlur" type="text" class="cutom-input-hide" onpaste="return false;">
     </div>
 </template>
@@ -16,9 +16,19 @@
                 default: 4,
                 required: false
             },
-            'inputType': {
+            'inputStyleType': {
                 type: String,
                 default: 'allBorder',
+                required: false
+            },
+            'inputType': {
+                type: String,
+                default: 'text',
+                required: false
+            },
+            'passwordChar': {
+                type: String,
+                default: '*',
                 required: false
             },
             'inputWidth': {
@@ -65,14 +75,14 @@
                     allBorder: '',
                     oneBorder: ['custom-input-no-border']
                 }
-                return styleConfig[this.inputType];
+                return styleConfig[this.inputStyleType];
             },
             spanActiveStyle() {
                 const styleConfig = {
                     allBorder: {outline: this.inputActiveOutline + ' auto 5px'},
                     oneBorder: {'box-shadow': '0 1px 0 ' + this.inputActiveOutline}
                 }
-                return styleConfig[this.inputType];
+                return styleConfig[this.inputStyleType];
             }
         },
         methods: {
