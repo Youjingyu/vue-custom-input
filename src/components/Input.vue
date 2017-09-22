@@ -1,8 +1,8 @@
 <template>
     <div class="custom-input">
-        <span v-for="(input, index) in spanValue" :key="index" @click="spanClick(index)"
+        <span v-for="(text, index) in spanValue" :key="index" @click="spanClick(index)"
               :style="[spanStyle, activeIndex === index ? spanActiveStyle : '']"
-              class="custom-input-span" :class="spanTypeStyle"></span>
+              class="custom-input-span" :class="spanTypeStyle">{{text}}</span>
         <input ref="hideInput" @keydown="inputKeydown" @input="inputEvent" @blur="inputBlur" type="text" class="cutom-input-hide" onpaste="return false;">
     </div>
 </template>
@@ -85,12 +85,36 @@
             },
             inputKeydown($event) {
                 const keycode = $event.keyCode || $event.which;
-                if(keycode !== 8 && $event.target.value.length >= this.inputNumber){
-                    $event.preventDefault();
+                if(keycode === 8){
+                    this.$set(this.spanValue, this.activeIndex, '');
+                    this.$emit('custom-input-change', this.getCustomInputVal());
+                    if(this.activeIndex > 0 && this.spanValue[this.activeIndex -1] === ''){
+                        this.activeIndex --;
+                    }
                 }
             },
             inputEvent($event){
-
+                const hideInput = $event.target;
+                if(hideInput !== ''){
+                    this.$set(this.spanValue, this.activeIndex, hideInput.value);
+                    $event.target.value = '';
+                    this.$emit('custom-input-change', this.getCustomInputVal());
+                    if(this.activeIndex < this.inputNumber - 1 && this.spanValue[this.activeIndex + 1] === ''){
+                        this.activeIndex ++;
+                    }
+                    const val = this.getCustomInputCompleteVal();
+                    if(val.length === this.inputNumber) {
+                        this.$emit('custom-input-complete', val);
+                    }
+                }
+            },
+            getCustomInputCompleteVal(){
+                return this.spanValue.join('');
+            },
+            getCustomInputVal(){
+                return this.spanValue.map((val) => {
+                    return val || ' ';
+                }).join('');
             }
         }
     }
