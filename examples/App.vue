@@ -1,12 +1,12 @@
 <template>
     <div class="custom-input-test">
-        <CustomInput inputType="password" @custom-input-change="complete"/>
+        <customInput input-type="password" @custom-input-change="complete"/>
     </div>
 </template>
 <script>
-    import CustomInput from './components/Input.vue'
+    import customInput from '../src'
     export default {
-        components: { CustomInput },
+        components: { customInput },
         methods: {
             complete(val) {
                 console.log(val);

@@ -9,7 +9,7 @@
 <script>
     import { assignObj } from '../module/util'
     export default {
-        name: 'CustomInput',
+        name: 'custom-input',
         props: {
             'inputNumber': {
                 type: Number,
