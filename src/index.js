@@ -1,10 +1,10 @@
-import CustomInput from './components/Input.vue'
-export default Input
+import customInput from './components/Input.vue'
+export default customInput
 
 if (typeof module != 'undefined' && module.exports) {
-  module.exports = CustomInput;
+  module.exports = customInput;
 } else if (typeof define == 'function' && define.amd) {
-  define( function () { return CustomInput; } );
+    define( function () { return customInput; } );
 } else {
-  window.CustomInput = CustomInput;
+  window.customInput = customInput;
 }
