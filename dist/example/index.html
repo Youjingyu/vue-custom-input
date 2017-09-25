@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no">
+    <title>Vue custom input</title>
+    <style lang="css" scoped>
+        .custom-input-test{
+            height: 50px;
+            width: 300px;
+        }
+    </style>
+</head>
+<body>
+<div id="app">
+    <div class="custom-input-test">
+        <custom-input input-type="password"/>
+    </div>
+</div>
+<script src="https://unpkg.com/vue@2.1/dist/vue.min.js"></script>
+<script src="../vue-custom-input.min.js"></script>
+<script>
+        new Vue({
+            el: '#app',
+            components: {
+                'custom-input': window.customInput
+            }
+        })
+</script>
+</body>
+</html>
