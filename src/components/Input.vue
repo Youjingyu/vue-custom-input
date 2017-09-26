@@ -7,7 +7,7 @@
     </div>
 </template>
 <script>
-    import { assignObj } from '../module/util'
+    import { assignObj, isObjEmpty } from '../module/util'
     export default {
         name: 'custom-input',
         props: {
@@ -46,9 +46,23 @@
                 default: '#20A0FF',
                 required: false
             },
-            'inputActiveOutline': {
+            'inputActiveOutlineColor': {
                 type: String,
                 default: '#58B7FF',
+                required: false
+            },
+            'inputStyle': {
+                type: Object,
+                default: function () {
+                    return {};
+                },
+                required: false
+            },
+            'inputActiveStyle': {
+                type: Object,
+                default: function () {
+                    return {};
+                },
                 required: false
             }
         },
@@ -64,11 +78,12 @@
                 if(width === ''){
                     width = 100 / this.inputNumber - 5 + '%'
                 }
-                return {
+                const style = {
                     width: width,
                     borderWidth: this.inputBorderWidth,
                     borderColor: this.inputBorderColor
                 }
+                return assignObj({}, style, this.inputStyle);
             },
             spanTypeStyle() {
                 const styleConfig = {
@@ -79,10 +94,10 @@
             },
             spanActiveStyle() {
                 const styleConfig = {
-                    allBorder: {outline: this.inputActiveOutline + ' auto 5px'},
-                    oneBorder: {'box-shadow': '0 1px 0 ' + this.inputActiveOutline}
+                    allBorder: {outline: this.inputActiveOutlineColor + ' solid 1px'},
+                    oneBorder: {'box-shadow': '0 1px 0 ' + this.inputActiveOutlineColor}
                 }
-                return styleConfig[this.inputStyleType];
+                return assignObj({}, styleConfig[this.inputStyleType], this.inputActiveStyle);
             }
         },
         methods: {
