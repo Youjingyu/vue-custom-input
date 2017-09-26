@@ -133,18 +133,37 @@
 </script>
 <style lang="css" scoped>
     .custom-input{
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -ms-flexbox;
         display: flex;
         position: relative;
+        -webkit-box-align: center;
+        -webkit-align-items: center;
+        -ms-flex-align: center;
         align-items: center;
+        -webkit-box-pack: justify;
+        -webkit-justify-content: space-between;
+        -ms-flex-pack: justify;
         justify-content: space-between;
         height: 100%;
     }
     .custom-input-span {
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -ms-flexbox;
         display: flex;
+        -webkit-box-align: center;
+        -webkit-align-items: center;
+        -ms-flex-align: center;
         align-items: center;
+        -webkit-box-pack: center;
+        -webkit-justify-content: center;
+        -ms-flex-pack: center;
         justify-content: center;
         position: relative;
         height: 100%;
+        -webkit-box-sizing: border-box;
         box-sizing: border-box;
         border-style: solid;
     }
@@ -158,6 +177,7 @@
         width: 100%;
         height: 100%;
         z-index: -1;
+        -webkit-box-sizing: border-box;
         box-sizing: border-box;
         opacity: 0;
     }
