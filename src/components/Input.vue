@@ -180,6 +180,8 @@
         -webkit-box-sizing: border-box;
         box-sizing: border-box;
         opacity: 0;
+        color: transparent;
+        text-indent: -999em;
     }
     .cutom-input-hide:focus{
         outline: none;
