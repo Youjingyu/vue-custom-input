@@ -4,26 +4,72 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, user-scalable=no">
     <title>Vue custom input</title>
-    <style lang="css" scoped>
-        .custom-input-test{
-            height: 50px;
-            width: 300px;
+    <style>
+        .container{
+            margin: 0 auto;
+            width: 100%;
+            max-width: 500px;
+        }
+        [v-cloak] {
+            display: none;
         }
     </style>
 </head>
 <body>
 <div id="app">
-    <div class="custom-input-test">
-        <custom-input input-type="password"/>
+    <div class="container" v-cloak>
+        <custom-input
+                input-height="50px"
+                :input-number="4"
+                input-type="number"
+                input-style-type="oneBorder"
+                @custom-input-change="change"
+                @custom-input-complete="complete">
+        </custom-input>
+        <h4>输入框值：{{customInput}}</h4>
+        <custom-input
+                input-height="50px"
+                :input-number="6"
+                input-style-type="allBorder"
+                input-type="password"
+                password-char="*"
+                :input-style="inputStyle"
+                :input-active-style="inputActiveStyle"
+                @custom-input-change="change2"
+                @custom-input-complete="complete2">
+        </custom-input>
+        <h4>输入框值：{{customInput2}}</h4>
     </div>
 </div>
 <script src="https://unpkg.com/vue@2.1/dist/vue.min.js"></script>
-<script src="../vue-custom-input.min.js"></script>
+<script src="../vue-custom-input.js"></script>
 <script>
         new Vue({
             el: '#app',
             components: {
                 'custom-input': window.customInput
+            },
+            data: function () {
+                return {
+                    inputStyle: {'border-color': '#20A0FF'},
+                    inputActiveStyle: {'outline': '#58B7FF ridge 1px'},
+                    customInput: '',
+                    customInput2: ''
+                }
+            },
+            methods: {
+                change: function (val) {
+                    this.customInput = val;
+                },
+                complete: function (val) {
+                    this.customInput = val;
+                },
+                change2: function (val) {
+                    this.customInput2 = val;
+                },
+                complete2: function (val) {
+                    this.customInput2 = val;
+                }
             }
         })
 </script>
