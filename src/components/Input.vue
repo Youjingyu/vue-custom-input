@@ -2,8 +2,9 @@
     <div class="custom-input">
         <span v-for="(text, index) in spanValue" :key="index" @click="spanClick(index)"
               :style="[spanStyle, activeIndex === index ? spanActiveStyle : '']"
-              class="custom-input-span" :class="spanTypeStyle">{{inputType === 'text' ? text : (text === '' ? '' : passwordChar)}}</span>
-        <input ref="hideInput" @keydown="inputKeydown" @input="inputEvent" @blur="inputBlur" type="text" class="cutom-input-hide" onpaste="return false;">
+              class="custom-input-span" :class="spanTypeStyle">{{inputType === 'password' ? (text === '' ? '' : passwordChar) : text}}</span>
+        <input ref="hideInput" @keydown="inputKeydown" @input="inputEvent" @blur="inputBlur"
+               :type="inputType" class="cutom-input-hide" onpaste="return false;">
     </div>
 </template>
 <script>
@@ -34,6 +35,11 @@
             'inputWidth': {
                 type: String,
                 default: '',
+                required: false
+            },
+            'inputHeight': {
+                type: String,
+                default: '50px',
                 required: false
             },
             'inputBorderWidth': {
@@ -80,6 +86,8 @@
                 }
                 const style = {
                     width: width,
+                    height: this.inputHeight,
+                    lineHeight: this.inputHeight,
                     borderWidth: this.inputBorderWidth,
                     borderColor: this.inputBorderColor
                 }
@@ -164,23 +172,11 @@
         height: 100%;
     }
     .custom-input-span {
-        display: -webkit-box;
-        display: -webkit-flex;
-        display: -ms-flexbox;
-        display: flex;
-        -webkit-box-align: center;
-        -webkit-align-items: center;
-        -ms-flex-align: center;
-        align-items: center;
-        -webkit-box-pack: center;
-        -webkit-justify-content: center;
-        -ms-flex-pack: center;
-        justify-content: center;
-        position: relative;
         height: 100%;
         -webkit-box-sizing: border-box;
         box-sizing: border-box;
         border-style: solid;
+        text-align: center;
     }
     .custom-input-no-border {
         border-top: none;
