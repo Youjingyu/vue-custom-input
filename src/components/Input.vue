@@ -7,7 +7,7 @@
     </div>
 </template>
 <script>
-    import { assignObj, isObjEmpty } from '../module/util'
+    import { assignObj } from '../module/util'
     export default {
         name: 'custom-input',
         props: {
