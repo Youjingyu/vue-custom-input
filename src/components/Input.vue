@@ -76,7 +76,7 @@
             spanStyle() {
                 let width = this.inputWidth;
                 if(width === ''){
-                    width = 100 / this.inputNumber - 5 + '%'
+                    width = 100 / this.inputNumber - 1 + '%'
                 }
                 const style = {
                     width: width,
@@ -113,11 +113,11 @@
                 if(keycode === 8) {
                     let backFlag = this.spanValue[this.activeIndex] === '' ? true : false;
                     this.$set(this.spanValue, this.activeIndex, '');
-                    this.$emit('custom-input-change', this.getCustomInputVal());
                     if (this.activeIndex > 0 && backFlag) {
                         this.activeIndex--;
                         this.$set(this.spanValue, this.activeIndex, '');
                     }
+                    this.$emit('custom-input-change', this.getCustomInputVal());
                 }
             },
             inputEvent($event){
