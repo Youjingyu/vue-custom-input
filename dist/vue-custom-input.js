@@ -1,8 +1,8 @@
 /*!
  * Vue custom input 
- * version: 0.0.1 
+ * version: 1.0.0 
  * repo: https://github.com/Youjingyu/vue-custom-input 
- * build: 2017-09-25 15:16:41
+ * build: 2017-09-26 16:26:01
  */
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
@@ -145,6 +145,11 @@ exports.default = {
             default: '',
             required: false
         },
+        'inputHeight': {
+            type: String,
+            default: '50px',
+            required: false
+        },
         'inputBorderWidth': {
             type: String,
             default: '1px',
@@ -155,9 +160,23 @@ exports.default = {
             default: '#20A0FF',
             required: false
         },
-        'inputActiveOutline': {
+        'inputActiveOutlineColor': {
             type: String,
             default: '#58B7FF',
+            required: false
+        },
+        'inputStyle': {
+            type: Object,
+            default: function _default() {
+                return {};
+            },
+            required: false
+        },
+        'inputActiveStyle': {
+            type: Object,
+            default: function _default() {
+                return {};
+            },
             required: false
         }
     },
@@ -172,13 +191,16 @@ exports.default = {
         spanStyle: function spanStyle() {
             var width = this.inputWidth;
             if (width === '') {
-                width = 100 / this.inputNumber - 5 + '%';
+                width = 100 / this.inputNumber - 1 + '%';
             }
-            return {
+            var style = {
                 width: width,
+                height: this.inputHeight,
+                lineHeight: this.inputHeight,
                 borderWidth: this.inputBorderWidth,
                 borderColor: this.inputBorderColor
             };
+            return (0, _util.assignObj)({}, style, this.inputStyle);
         },
         spanTypeStyle: function spanTypeStyle() {
             var styleConfig = {
@@ -189,10 +211,10 @@ exports.default = {
         },
         spanActiveStyle: function spanActiveStyle() {
             var styleConfig = {
-                allBorder: { outline: this.inputActiveOutline + ' auto 5px' },
-                oneBorder: { 'box-shadow': '0 1px 0 ' + this.inputActiveOutline }
+                allBorder: { outline: this.inputActiveOutlineColor + ' solid 1px' },
+                oneBorder: { 'box-shadow': '0 1px 0 ' + this.inputActiveOutlineColor }
             };
-            return styleConfig[this.inputStyleType];
+            return (0, _util.assignObj)({}, styleConfig[this.inputStyleType], this.inputActiveStyle);
         }
     },
     methods: {
@@ -208,11 +230,11 @@ exports.default = {
             if (keycode === 8) {
                 var backFlag = this.spanValue[this.activeIndex] === '' ? true : false;
                 this.$set(this.spanValue, this.activeIndex, '');
-                this.$emit('custom-input-change', this.getCustomInputVal());
                 if (this.activeIndex > 0 && backFlag) {
                     this.activeIndex--;
                     this.$set(this.spanValue, this.activeIndex, '');
                 }
+                this.$emit('custom-input-change', this.getCustomInputVal());
             }
         },
         inputEvent: function inputEvent($event) {
@@ -240,6 +262,7 @@ exports.default = {
         }
     }
 }; //
+//
 //
 //
 //
@@ -324,12 +347,89 @@ var fadeColor = exports.fadeColor = function fadeColor(color, percent) {
     return gradientColors(color, percent);
 };
 
-var assignObj = exports.assignObj = function assignObj(obj) {
-    var result = {};
-    for (var i in obj) {
-        result[i] = obj[i];
+/*
+ object-assign
+ */
+var getOwnPropertySymbols = Object.getOwnPropertySymbols;
+var hasOwnProperty = Object.prototype.hasOwnProperty;
+var propIsEnumerable = Object.prototype.propertyIsEnumerable;
+
+function toObject(val) {
+    if (val === null || val === undefined) {
+        throw new TypeError('Object.assign cannot be called with null or undefined');
     }
-    return result;
+
+    return Object(val);
+}
+
+function shouldUseNative() {
+    try {
+        if (!Object.assign) {
+            return false;
+        }
+
+        // Detect buggy property enumeration order in older V8 versions.
+
+        // https://bugs.chromium.org/p/v8/issues/detail?id=4118
+        var test1 = new String('abc'); // eslint-disable-line no-new-wrappers
+        test1[5] = 'de';
+        if (Object.getOwnPropertyNames(test1)[0] === '5') {
+            return false;
+        }
+
+        // https://bugs.chromium.org/p/v8/issues/detail?id=3056
+        var test2 = {};
+        for (var i = 0; i < 10; i++) {
+            test2['_' + String.fromCharCode(i)] = i;
+        }
+        var order2 = Object.getOwnPropertyNames(test2).map(function (n) {
+            return test2[n];
+        });
+        if (order2.join('') !== '0123456789') {
+            return false;
+        }
+
+        // https://bugs.chromium.org/p/v8/issues/detail?id=3056
+        var test3 = {};
+        'abcdefghijklmnopqrst'.split('').forEach(function (letter) {
+            test3[letter] = letter;
+        });
+        if (Object.keys(Object.assign({}, test3)).join('') !== 'abcdefghijklmnopqrst') {
+            return false;
+        }
+
+        return true;
+    } catch (err) {
+        // We don't expect any of the above to throw, but better to be safe.
+        return false;
+    }
+}
+
+var assignObj = exports.assignObj = shouldUseNative() ? Object.assign : function (target, source) {
+    var from;
+    var to = toObject(target);
+    var symbols;
+
+    for (var s = 1; s < arguments.length; s++) {
+        from = Object(arguments[s]);
+
+        for (var key in from) {
+            if (hasOwnProperty.call(from, key)) {
+                to[key] = from[key];
+            }
+        }
+
+        if (getOwnPropertySymbols) {
+            symbols = getOwnPropertySymbols(from);
+            for (var i = 0; i < symbols.length; i++) {
+                if (propIsEnumerable.call(from, symbols[i])) {
+                    to[symbols[i]] = from[symbols[i]];
+                }
+            }
+        }
+    }
+
+    return to;
 };
 
 /***/ }),
@@ -341,7 +441,7 @@ exports = module.exports = __webpack_require__(5)();
 
 
 // module
-exports.push([module.i, ".custom-input[data-v-26cf5f18]{display:flex;position:relative;align-items:center;justify-content:space-between;height:100%}.custom-input-span[data-v-26cf5f18]{display:flex;align-items:center;justify-content:center;position:relative;height:100%;box-sizing:border-box;border-style:solid}.custom-input-no-border[data-v-26cf5f18]{border-top:none;border-right:none;border-left:none}.cutom-input-hide[data-v-26cf5f18]{position:absolute;width:100%;height:100%;z-index:-1;box-sizing:border-box;opacity:0}.cutom-input-hide[data-v-26cf5f18]:focus{outline:none}", ""]);
+exports.push([module.i, ".custom-input[data-v-26cf5f18]{display:-webkit-box;display:-ms-flexbox;display:flex;position:relative;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between;height:100%}.custom-input-span[data-v-26cf5f18]{height:100%;box-sizing:border-box;border-style:solid;text-align:center}.custom-input-no-border[data-v-26cf5f18]{border-top:none;border-right:none;border-left:none}.cutom-input-hide[data-v-26cf5f18]{position:absolute;width:100%;height:100%;z-index:-1;box-sizing:border-box;opacity:0;color:transparent;text-indent:-999em}.cutom-input-hide[data-v-26cf5f18]:focus{outline:none}", ""]);
 
 // exports
 
@@ -473,12 +573,12 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           _vm.spanClick(index)
         }
       }
-    }, [_vm._v(_vm._s(_vm.inputType === 'text' ? text : (text === '' ? '' : _vm.passwordChar)))])
+    }, [_vm._v(_vm._s(_vm.inputType === 'password' ? (text === '' ? '' : _vm.passwordChar) : text))])
   }), _vm._v(" "), _c('input', {
     ref: "hideInput",
     staticClass: "cutom-input-hide",
     attrs: {
-      "type": "text",
+      "type": _vm.inputType,
       "onpaste": "return false;"
     },
     on: {
