@@ -2,7 +2,7 @@
 
 Vue custom input is a vue component for custom split input box, mobile web input box, simulating native app input box and etc. It's designed to input password and verification code. But you can also use it in other situation as you wish.
 
-![](https://github.com/Youjingyu/vue-custom-input/tree/master/dist/example/example.gif)
+![](https://github.com/Youjingyu/vue-custom-input/raw/master/dist/example/example.gif)
 
 ## Demo
 
@@ -79,4 +79,4 @@ npm i vue-custom-input -S
 | input-border-color | input box border color | N | String | '#20A0FF' |
 | input-active-outline-color | input box outline color when focus on it | N | String | '#58B7FF' |
 | input-style | customize input box style as you want. All styles will be injected into box's style attribute | N | Object | {} |
-| input-active-style | input box style when focus on it. | N | Object | {} |
+| input-active-style | input box style when focus on it. All styles will be injected into box's style attribute | N | Object | {} |
