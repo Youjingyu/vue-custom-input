@@ -11,7 +11,7 @@ Vue custom input is a vue component for custom split input box, mobile web input
 ## Installation
 
 ```bash
-npm i vue-custom-input -S
+npm i vue-custom-inputs -S
 ```
 
 ## Usage
