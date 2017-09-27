@@ -4,11 +4,37 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, user-scalable=no">
     <title>Vue custom input</title>
+    <link href="https://cdn.bootcss.com/prism/9000.0.1/themes/prism.min.css" rel="stylesheet">
     <style>
+        body{
+            margin: 0 auto;
+            width: 100%;
+            max-width: 800px;
+        }
+        .title{
+            text-align: center;
+        }
+        .desciption{
+            margin: 50px auto;
+            font-size: 20px;
+            line-height: 1.5;
+            text-align: justify;
+        }
         .container{
             margin: 0 auto;
             width: 100%;
             max-width: 500px;
+        }
+        .examples{
+            font-size: 20px;
+        }
+        .item{
+            margin: 50px auto 20px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        .item-first{
+            margin-top: 0;
         }
         [v-cloak] {
             display: none;
@@ -16,6 +42,49 @@
     </style>
 </head>
 <body>
+<h1 class="title">Vue custom input</h1>
+<p class="desciption">
+    <a href="https://github.com/Youjingyu/vue-custom-input">Vue custom input</a> is a vue component for custom split input box, mobile web input box, simulating native app input box and etc. It's designed to input password and verification code. But you can also use it in other situation as you wish. <a href="https://github.com/Youjingyu/vue-custom-input">See docs.</a>
+</p>
+<p class="item examples">Examples :</p>
+<p class="item item-first">Code :</p>
+<div class="code">
+    <pre>
+        <code class="language-html">
+            &lt;template&gt;
+                &lt;custom-input
+                        input-height="50px"
+                        :input-number="4"
+                        input-type="number"
+                        input-style-type="oneBorder"
+                        @custom-input-change="change"
+                        @custom-input-complete="complete"&gt;
+                &lt;/custom-input&gt;
+                &lt;h4&gt;输入框值：{{customInput}}&lt;/h4&gt;
+            &lt;/template&gt;
+            &lt;script&gt;
+                import customInput from 'vue-custom-input';
+                export default {
+                    data() {
+                        return {
+                            customInput: ''
+                        }
+                    },
+                    components: { 'custom-input': customInput },
+                    methods: {
+                        change(val) {
+                            this.customInput = val;
+                        },
+                        complete(val) {
+                            this.customInput = val;
+                        }
+                    }
+                }
+            &lt;/script&gt;
+        </code>
+</pre>
+</div>
+<p class="item">Result :</p>
 <div id="app">
     <div class="container" v-cloak>
         <custom-input
@@ -27,6 +96,53 @@
                 @custom-input-complete="complete">
         </custom-input>
         <h4>输入框值：{{customInput}}</h4>
+    </div>
+</div>
+<p class="item">Code :</p>
+<div class="code">
+    <pre>
+        <code class="language-html">
+            &lt;template&gt;
+                &lt;custom-input
+                        input-height="50px"
+                        :input-number="6"
+                        input-style-type="allBorder"
+                        input-type="password"
+                        password-char="*"
+                        :input-style="inputStyle"
+                        :input-active-style="inputActiveStyle"
+                        @custom-input-change="change2"
+                        @custom-input-complete="complete2"&gt;
+                &lt;/custom-input&gt;
+                &lt;h4&gt;输入框值：{{customInput2}}&lt;/h4&gt;
+            &lt;/template&gt;
+            &lt;script&gt;
+                import customInput from 'vue-custom-input';
+                export default {
+                    data: function () {
+                        return {
+                            inputStyle: {'border-color': '#20A0FF'},
+                            inputActiveStyle: {'outline': '#58B7FF ridge 1px'},
+                            customInput2: ''
+                        }
+                    },
+                    components: { 'custom-input': customInput },
+                    methods: {
+                        change2: function (val) {
+                            this.customInput2 = val;
+                        },
+                        complete2: function (val) {
+                            this.customInput2 = val;
+                        }
+                    }
+                }
+            &lt;/script&gt;
+        </code>
+</pre>
+</div>
+<p class="item">Result :</p>
+<div id="app2">
+    <div class="container" v-cloak>
         <custom-input
                 input-height="50px"
                 :input-number="6"
@@ -43,6 +159,7 @@
 </div>
 <script src="https://unpkg.com/vue@2.1/dist/vue.min.js"></script>
 <script src="../vue-custom-input.js"></script>
+<script src="https://cdn.bootcss.com/prism/1.6.0/prism.min.js"></script>
 <script>
         new Vue({
             el: '#app',
@@ -51,10 +168,7 @@
             },
             data: function () {
                 return {
-                    inputStyle: {'border-color': '#20A0FF'},
-                    inputActiveStyle: {'outline': '#58B7FF ridge 1px'},
                     customInput: '',
-                    customInput2: ''
                 }
             },
             methods: {
@@ -63,7 +177,22 @@
                 },
                 complete: function (val) {
                     this.customInput = val;
-                },
+                }
+            }
+        });
+        new Vue({
+            el: '#app2',
+            components: {
+                'custom-input': window.customInput
+            },
+            data: function () {
+                return {
+                    inputStyle: {'border-color': '#20A0FF'},
+                    inputActiveStyle: {'outline': '#58B7FF ridge 1px'},
+                    customInput2: ''
+                }
+            },
+            methods: {
                 change2: function (val) {
                     this.customInput2 = val;
                 },
@@ -71,7 +200,7 @@
                     this.customInput2 = val;
                 }
             }
-        })
+        });
 </script>
 </body>
 </html>
