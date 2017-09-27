@@ -3,6 +3,7 @@
     "name": "youjingyu",
     "email": "735284268@qq.com"
   },
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/Youjingyu/vue-custom-input/issues"
   },
@@ -27,7 +28,7 @@
   "directories": {},
   "dist": {
     "shasum": "",
-    "tarball": "https://registry.npmjs.org/vue-scroller/-/vue-scroller-2.1.2.tgz"
+    "tarball": "https://github.com/Youjingyu/vue-custom-input/archive/1.0.0.tar.gz"
   },
   "gitHead": "",
   "homepage": "https://github.com/Youjingyu/vue-custom-input",
@@ -35,8 +36,8 @@
     "vue",
     "input",
     "custom input",
-    "mobile",
-    "simulate native app"
+    "mobile web input",
+    "simulate native app input"
   ],
   "main": "dist/vue-custom-input.js",
   "maintainers": [
@@ -45,7 +46,7 @@
       "email": "735284268@qq.com"
     }
   ],
-  "name": "vue-custom-input",
+  "name": "vue-custom-inputs",
   "optionalDependencies": {},
   "readme": "ERROR: No README data found!",
   "repository": {
