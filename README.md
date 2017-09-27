@@ -1,37 +1,82 @@
-## Welcome to GitHub Pages
+# Vue custom input ![version](https://img.shields.io/badge/version-%20v1.0.0%20-green.svg) ![vue](https://img.shields.io/badge/vue-%20v2.1%20-green.svg) 
 
-You can use the [editor on GitHub](https://github.com/Youjingyu/vue-custom-input/edit/master/README.md) to maintain and preview the content for your website in Markdown files.
+Vue custom input is a vue component for custom split input box, mobile web input box, simulating native app input box and etc. It's designed to input password and verification code. But you can also use it in other situation as you wish.
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+![](https://github.com/Youjingyu/vue-custom-input/tree/master/dist/example/example.gif)
 
-### Markdown
+## Demo
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+[https://wangdahoo.github.io/vue-scroller/](https://wangdahoo.github.io/vue-scroller/)
 
-```markdown
-Syntax highlighted code block
+## Installation
 
-# Header 1
-## Header 2
-### Header 3
-
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
+```bash
+npm i vue-custom-input -S
 ```
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
+## Usage
 
-### Jekyll Themes
+### use in vue single file components
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/Youjingyu/vue-custom-input/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
+```html
+<template>
+    <custom-input
+        input-height="50px"
+        :input-number="4"
+        input-type="number"
+        input-style-type="oneBorder"
+        @custom-input-change="change"
+        @custom-input-complete="complete">
+    </custom-input>
+</template>
+<script>
+    import customInput from 'vue-custom-input';
+    export default {
+        components: { 'custom-input': customInput },
+        methods: {
+            change(val) {
+                
+            },
+            complete(val) {
+                
+            }
+        }
+    }
+</script>
+```
+### use in browser globals
+```html
+<div id="app">
+    <custom-input></custom-input>
+</div>
+<script src="vue.js"></script>
+<script src="vue-custom.js"></script>
+<script>
+     new Vue({
+        el: '#app',
+        components: {
+            'custom-input': window.customInput
+        }
+     });
+</script>
+```
 
-### Support or Contact
+## API
 
-Having trouble with Pages? Check out our [documentation](https://help.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+#### Vue custom input component attributes:
+
+| Attr. Name | Description | Required | Type |  Default Value |
+|-----|-----|-----|-----|-----|
+| custom-input-change | called when input value is changed | N | Function | - |
+| custom-input-complete | called when all input boxes are filled | N | Function | - |
+| input-number | input box number | N | Number | 4 |
+| input-style-type | two preset styles. You can also design your style by the following attributes | N | 'allBorder', 'oneBorder' | 'allBorder' |
+| input-type | just like html5 input type attribute, can be tel, number, text and etc. | N | String | 'text' |
+| password-char | the character showed in input box when the input-type is password | N | String | '*' |
+| input-width | input box width | N | String | - |
+| input-height | input box height | N | String | '50px' |
+| input-border-width | input box border width | N | String | '1px' |
+| input-border-color | input box border color | N | String | '#20A0FF' |
+| input-active-outline-color | input box outline color when focus on it | N | String | '#58B7FF' |
+| input-style | customize input box style as you want. All styles will be injected into box's style attribute | N | Object | {} |
+| input-active-style | input box style when focus on it. | N | Object | {} |
