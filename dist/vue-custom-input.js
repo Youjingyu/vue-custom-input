@@ -2,7 +2,7 @@
  * Vue custom input 
  * version: 1.0.0 
  * repo: https://github.com/Youjingyu/vue-custom-input 
- * build: 2017-09-26 16:26:01
+ * build: 2017-09-27 10:24:10
  */
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
@@ -182,7 +182,7 @@ exports.default = {
     },
     data: function data() {
         return {
-            spanValue: new Array(this.inputNumber).fill(''),
+            spanValue: (0, _util.arrayFill)(new Array(this.inputNumber), ''),
             activeIndex: undefined
         };
     },
@@ -312,39 +312,11 @@ if (typeof module != 'undefined' && module.exports) {
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-var fadeColor = exports.fadeColor = function fadeColor(color, percent) {
-    // convert #hex notation to rgb array
-    var parseColor = function parseColor(hexStr) {
-        return hexStr.length === 4 ? hexStr.substr(1).split('').map(function (s) {
-            return 0x11 * parseInt(s, 16);
-        }) : [hexStr.substr(1, 2), hexStr.substr(3, 2), hexStr.substr(5, 2)].map(function (s) {
-            return parseInt(s, 16);
-        });
-    };
-
-    // zero-pad 1 digit to 2
-    var pad = function pad(s) {
-        return s.length === 1 ? '0' + s : s;
-    };
-
-    var gradientColors = function gradientColors(color, percent, gamma) {
-        var j,
-            output = [],
-            so = [];
-        gamma = gamma || 1;
-        var normalize = function normalize(channel) {
-            return Math.pow(channel / 255, gamma);
-        };
-        color = parseColor(color).map(normalize);
-        for (j = 0; j < 3; j++) {
-            so[j] = pad(Math.round(Math.pow(color[j] * percent, 1 / gamma) * 255).toString(16));
-            console.log(so[j]);
-        }
-        output.push('#' + so.join(''));
-        return output;
-    };
-
-    return gradientColors(color, percent);
+var arrayFill = exports.arrayFill = function arrayFill(arr, fillVal) {
+    for (var i = 0, len = arr.length; i < len; i++) {
+        arr[i] = fillVal;
+    }
+    return arr;
 };
 
 /*

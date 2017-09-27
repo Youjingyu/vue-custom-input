@@ -8,7 +8,7 @@
     </div>
 </template>
 <script>
-    import { assignObj } from '../module/util'
+    import { assignObj, arrayFill } from '../module/util'
     export default {
         name: 'custom-input',
         props: {
@@ -74,7 +74,7 @@
         },
         data() {
             return {
-                spanValue: new Array(this.inputNumber).fill(''),
+                spanValue: arrayFill(new Array(this.inputNumber), ''),
                 activeIndex: undefined
             }
         },

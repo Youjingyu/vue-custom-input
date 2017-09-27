@@ -1,3 +1,10 @@
+export const arrayFill = (arr, fillVal) => {
+    for(let i = 0, len = arr.length; i < len; i++){
+        arr[i] = fillVal;
+    }
+    return arr;
+}
+
 /*
  object-assign
  */
