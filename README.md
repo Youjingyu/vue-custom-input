@@ -6,7 +6,7 @@ Vue custom input is a vue component for custom split input box, mobile web input
 
 ## Demo
 
-[https://wangdahoo.github.io/vue-scroller/](https://wangdahoo.github.io/vue-scroller/)
+[https://youjingyu.github.io/vue-custom-input/dist/example/](https://youjingyu.github.io/vue-custom-input/dist/example/)
 
 ## Installation
 
