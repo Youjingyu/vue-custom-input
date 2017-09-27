@@ -1,8 +1,10 @@
 <template>
-    <div class="custom-input">
-        <span v-for="(text, index) in spanValue" :key="index" @click="spanClick(index)"
-              :style="[spanStyle, activeIndex === index ? spanActiveStyle : '']"
-              class="custom-input-span" :class="spanTypeStyle">{{inputType === 'password' ? (text === '' ? '' : passwordChar) : text}}</span>
+    <div class="custom-input-container">
+        <div class="custom-input">
+            <span v-for="(text, index) in spanValue" :key="index" @click="spanClick(index)"
+                  :style="[spanStyle, activeIndex === index ? spanActiveStyle : '']"
+                  class="custom-input-span" :class="spanTypeStyle">{{inputType === 'password' ? (text === '' ? '' : passwordChar) : text}}</span>
+        </div>
         <input ref="hideInput" @keydown="inputKeydown" @input="inputEvent" @blur="inputBlur"
                :type="inputType" class="cutom-input-hide" onpaste="return false;">
     </div>
@@ -155,12 +157,14 @@
     }
 </script>
 <style lang="css" scoped>
+    .custom-input-container{
+        position: relative;
+    }
     .custom-input{
         display: -webkit-box;
         display: -webkit-flex;
         display: -ms-flexbox;
         display: flex;
-        position: relative;
         -webkit-box-align: center;
         -webkit-align-items: center;
         -ms-flex-align: center;
@@ -169,7 +173,6 @@
         -webkit-justify-content: space-between;
         -ms-flex-pack: justify;
         justify-content: space-between;
-        height: 100%;
     }
     .custom-input-span {
         height: 100%;
@@ -185,6 +188,8 @@
     }
     .cutom-input-hide{
         position: absolute;
+        top: 0;
+        left: 0;
         width: 100%;
         height: 100%;
         z-index: -1;

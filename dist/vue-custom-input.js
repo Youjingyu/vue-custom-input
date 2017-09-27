@@ -2,7 +2,7 @@
  * Vue custom input 
  * version: 1.0.0 
  * repo: https://github.com/Youjingyu/vue-custom-input 
- * build: 2017-09-27 10:24:10
+ * build: 2017-09-27 11:01:22
  */
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
@@ -270,6 +270,8 @@ exports.default = {
 //
 //
 //
+//
+//
 
 /***/ }),
 /* 2 */
@@ -413,7 +415,7 @@ exports = module.exports = __webpack_require__(5)();
 
 
 // module
-exports.push([module.i, ".custom-input[data-v-26cf5f18]{display:-webkit-box;display:-ms-flexbox;display:flex;position:relative;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between;height:100%}.custom-input-span[data-v-26cf5f18]{height:100%;box-sizing:border-box;border-style:solid;text-align:center}.custom-input-no-border[data-v-26cf5f18]{border-top:none;border-right:none;border-left:none}.cutom-input-hide[data-v-26cf5f18]{position:absolute;width:100%;height:100%;z-index:-1;box-sizing:border-box;opacity:0;color:transparent;text-indent:-999em}.cutom-input-hide[data-v-26cf5f18]:focus{outline:none}", ""]);
+exports.push([module.i, ".custom-input-container[data-v-26cf5f18]{position:relative}.custom-input[data-v-26cf5f18]{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between}.custom-input-span[data-v-26cf5f18]{height:100%;box-sizing:border-box;border-style:solid;text-align:center}.custom-input-no-border[data-v-26cf5f18]{border-top:none;border-right:none;border-left:none}.cutom-input-hide[data-v-26cf5f18]{position:absolute;top:0;left:0;width:100%;height:100%;z-index:-1;box-sizing:border-box;opacity:0;color:transparent;text-indent:-999em}.cutom-input-hide[data-v-26cf5f18]:focus{outline:none}", ""]);
 
 // exports
 
@@ -533,8 +535,10 @@ module.exports = function normalizeComponent (
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
+    staticClass: "custom-input-container"
+  }, [_c('div', {
     staticClass: "custom-input"
-  }, [_vm._l((_vm.spanValue), function(text, index) {
+  }, _vm._l((_vm.spanValue), function(text, index) {
     return _c('span', {
       key: index,
       staticClass: "custom-input-span",
@@ -546,7 +550,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         }
       }
     }, [_vm._v(_vm._s(_vm.inputType === 'password' ? (text === '' ? '' : _vm.passwordChar) : text))])
-  }), _vm._v(" "), _c('input', {
+  })), _vm._v(" "), _c('input', {
     ref: "hideInput",
     staticClass: "cutom-input-hide",
     attrs: {
@@ -558,7 +562,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "input": _vm.inputEvent,
       "blur": _vm.inputBlur
     }
-  })], 2)
+  })])
 },staticRenderFns: []}
 
 /***/ }),
