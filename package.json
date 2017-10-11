@@ -58,5 +58,5 @@
     "dev": "cross-env NODE_ENV=development webpack-dev-server --open --hot",
     "doc": "cross-env NODE_ENV=production BUILD=doc webpack --progress --hide-modules"
   },
-  "version": "1.0.3"
+  "version": "1.0.4"
 }

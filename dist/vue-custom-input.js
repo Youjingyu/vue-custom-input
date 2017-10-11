@@ -1,8 +1,8 @@
 /*!
  * Vue custom input 
- * version: 1.0.0 
+ * version: 1.0.4 
  * repo: https://github.com/Youjingyu/vue-custom-input 
- * build: 2017-09-27 11:01:22
+ * build: 2017-10-11 21:22:33
  */
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
@@ -239,9 +239,9 @@ exports.default = {
         },
         inputEvent: function inputEvent($event) {
             var hideInput = $event.target;
-            if (hideInput !== '') {
+            if (hideInput.value !== '') {
                 this.$set(this.spanValue, this.activeIndex, hideInput.value);
-                $event.target.value = '';
+                hideInput.value = '';
                 this.$emit('custom-input-change', this.getCustomInputVal());
                 if (this.activeIndex < this.inputNumber - 1) {
                     this.activeIndex++;
@@ -576,7 +576,7 @@ var content = __webpack_require__(4);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(9)("2c441759", content, true);
+var update = __webpack_require__(9)("94df2f7e", content, true);
 
 /***/ }),
 /* 9 */
