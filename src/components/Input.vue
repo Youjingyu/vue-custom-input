@@ -132,9 +132,9 @@
             },
             inputEvent($event){
                 const hideInput = $event.target;
-                if(hideInput !== ''){
+                if(hideInput.value !== ''){
                     this.$set(this.spanValue, this.activeIndex, hideInput.value);
-                    $event.target.value = '';
+                    hideInput.value = '';
                     this.$emit('custom-input-change', this.getCustomInputVal());
                     if(this.activeIndex < this.inputNumber - 1){
                         this.activeIndex ++;
