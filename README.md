@@ -1,4 +1,5 @@
 # Vue custom input ![version](https://img.shields.io/badge/version-%20v1.0.4%20-green.svg) ![vue](https://img.shields.io/badge/vue-%20v2.1%20-green.svg) 
+[![NPM](https://nodei.co/npm/vue-custom-inputs.png?downloads=true)](https://nodei.co/npm/vue-custom-inputs/)
 
 Vue custom input is a vue component for custom split input box, mobile web input box, simulating native app input box and etc. It's designed to input password and verification code. But you can also use it in other situation as you wish.
 
